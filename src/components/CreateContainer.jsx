@@ -1,6 +1,17 @@
-import { deleteObject, getDownloadURL, ref, uploadBytesResumable, } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 import React, { useState } from "react";
-import { MdFastfood, MdCloudUpload, MdDelete, MdFoodBank, MdAttachMoney, } from "react-icons/md";
+import {
+  MdFastfood,
+  MdCloudUpload,
+  MdDelete,
+  MdFoodBank,
+  MdAttachMoney,
+} from "react-icons/md";
 import { storage } from "../firebase.config";
 import { categories } from "../utils/data";
 import { saveItem } from "../utils/firebaseFunctions";
@@ -136,10 +147,11 @@ const CreateItem = () => {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}
-              className={`w-full p-2 rounded-lg text-center ${alertStatus === "danger"
+              className={`w-full p-2 rounded-lg text-center ${
+                alertStatus === "danger"
                   ? "bg-red-400 text-red-800"
                   : "bg-emerald-400 text-emerald-800"
-                }`}
+              }`}
             >
               {msg}
             </motion.p>
