@@ -18,12 +18,18 @@ const Header = () => {
   const login = async () => {
     if (!user) {
       try {
-        const { user: firebaseUser } = await signInWithPopup(firebaseAuth, provider);
+        const { user: firebaseUser } = await signInWithPopup(
+          firebaseAuth,
+          provider
+        );
         dispatch({
           type: actionType.SET_USER,
           user: firebaseUser.providerData[0],
         });
-        localStorage.setItem("user", JSON.stringify(firebaseUser.providerData[0]));
+        localStorage.setItem(
+          "user",
+          JSON.stringify(firebaseUser.providerData[0])
+        );
       } catch (error) {
         console.error("Error logging in:", error);
       }
@@ -54,26 +60,44 @@ const Header = () => {
     >
       {user && user.email === process.env.REACT_APP_ADMIN_EMAIL && (
         <Link to="/create">
-          <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base" onClick={() => setIsMenu(false)}>
+          <p
+            className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
+            onClick={() => setIsMenu(false)}
+          >
             New Item <MdAdd />
           </p>
         </Link>
       )}
       <ul className="flex flex-col">
-        <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2" onClick={() => setIsMenu(false)}>
+        <li
+          className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2"
+          onClick={() => setIsMenu(false)}
+        >
           <Link to="/">Home</Link>
         </li>
-        <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2" onClick={() => setIsMenu(false)}>
+        <li
+          className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2"
+          onClick={() => setIsMenu(false)}
+        >
           <Link to="/#menu">Menu</Link>
         </li>
-        <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2" onClick={() => setIsMenu(false)}>
+        <li
+          className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2"
+          onClick={() => setIsMenu(false)}
+        >
           <Link to="/aboutus">About Us</Link>
         </li>
-        <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2" onClick={() => setIsMenu(false)}>
+        <li
+          className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2"
+          onClick={() => setIsMenu(false)}
+        >
           <Link to="/services">Services</Link>
         </li>
       </ul>
-      <p className="m-2 p-2 rounded-md shadow-md flex items-center justify-center bg-gray-200 gap-3 cursor-pointer hover:bg-gray-300 transition-all duration-100 ease-in-out text-textColor text-base" onClick={logout}>
+      <p
+        className="m-2 p-2 rounded-md shadow-md flex items-center justify-center bg-gray-200 gap-3 cursor-pointer hover:bg-gray-300 transition-all duration-100 ease-in-out text-textColor text-base"
+        onClick={logout}
+      >
         Logout <MdLogout />
       </p>
     </motion.div>
@@ -107,11 +131,16 @@ const Header = () => {
               <Link to="/services">Services</Link>
             </li>
           </motion.ul>
-          <div className="relative flex items-center justify-center" onClick={showCart}>
+          <div
+            className="relative flex items-center justify-center"
+            onClick={showCart}
+          >
             <MdShoppingBasket className="text-textColor text-2xl cursor-pointer" />
             {cartItems && cartItems.length > 0 && (
               <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center">
-                <p className="text-xs text-white font-semibold">{cartItems.length}</p>
+                <p className="text-xs text-white font-semibold">
+                  {cartItems.length}
+                </p>
               </div>
             )}
           </div>
@@ -130,11 +159,16 @@ const Header = () => {
 
       {/* Mobile */}
       <div className="flex items-center justify-between md:hidden w-full h-full">
-        <div className="relative flex items-center justify-center" onClick={showCart}>
+        <div
+          className="relative flex items-center justify-center"
+          onClick={showCart}
+        >
           <MdShoppingBasket className="text-textColor text-2xl cursor-pointer" />
           {cartItems && cartItems.length > 0 && (
             <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center">
-              <p className="text-xs text-white font-semibold">{cartItems.length}</p>
+              <p className="text-xs text-white font-semibold">
+                {cartItems.length}
+              </p>
             </div>
           )}
         </div>
