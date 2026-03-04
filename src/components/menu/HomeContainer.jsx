@@ -9,8 +9,8 @@ const HomeContainer = () => {
       id="home"
     >
       <div className="py-2 flex-1 flex flex-col items-start justify-center gap-6">
-        <div className="flex items-center gap-2 justify-center hover:scale-125 bg-blue-100 px-4 py-1 rounded-full">
-          <p className="text-base text-blue-500 font-semibold">Bike Delivery</p>
+        <div className="flex items-center gap-2 justify-center hover:scale-125 bg-foodEasyLite px-4 py-1 rounded-full">
+          <p className="text-base text-foodEasyPrimary font-semibold">Bike Delivery</p>
           <div className="w-8 h-8 bg-white rounded-full overflow-hidden drop-shadow-xl">
             <img
               src={Delivery}
@@ -22,7 +22,7 @@ const HomeContainer = () => {
 
         <p className="text-[2.5rem] lg:text-[4.5rem] font-bold tracking-wide text-headingColor">
           Craziness and Foodiness
-          <span className="text-blue-600 text-[3rem] lg:text-[5rem]">
+          <span className="text-foodEasySecondary text-[3rem] lg:text-[5rem]">
             <br></br>At Your Doorstep.
           </span>
         </p>
@@ -38,7 +38,7 @@ const HomeContainer = () => {
 
         <button
           type="button"
-          className="bg-gradient-to-br from-blue-400 to-blue-500 w-full md:w-auto px-4 py-2  rounded-lg hover:shadow-lg hover:scale-110 transition-all ease-in-out duration-100"
+          className="bg-gradient-to-br from-foodEasyPrimary to-foodEasySecondary w-full md:w-auto px-4 py-2  rounded-lg hover:shadow-lg hover:scale-110 transition-all ease-in-out duration-100"
         >
           <a href="#menu" className="text-white">
             Order now
@@ -48,7 +48,7 @@ const HomeContainer = () => {
       <div className="flex items-center relative">
         <div
           className="mx-5 w-full h-650"
-          style={{ background: "linear-gradient(to bottom, #03B7F2, #FFFFFF)" }}
+          style={{ background: "linear-gradient(to bottom, var(--food-easy-primary), #FFFFFF)" }}
         ></div>
 
         <div className="w-full h-full absolute top-0 left-0 flex items-center justify-center lg:px-32 py-10 my-5 gap-4 flex-wrap">
@@ -72,7 +72,7 @@ const HomeContainer = () => {
                 </p>
 
                 <p className="text-sm font-semibold text-headingColor">
-                  <span className="text-xs text-blue-600">$</span> {n.price}
+                  <span className="text-xs text-foodEasySecondary">$</span> {n.price}
                 </p>
               </div>
             ))}

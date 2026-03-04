@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
+:root {
+  --food-easy-primary: #3b82f6;
+  --food-easy-secondary: #2563eb;
+  --food-easy-lite: #eff6ff;
+  --food-easy-hover: #1d4ed8;
+  --food-easy-border: #93c5fd;
+}
+
 *{
     margin:0;
     padding:0;
@@ -12,7 +20,7 @@ body{
 .hover-underline-animation {
     display: inline-block;
     position: relative;
-    color: #0087ca;
+    color: var(--food-easy-primary);
   }
   
   .hover-underline-animation:after {
@@ -23,7 +31,7 @@ body{
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: #0087ca;
+    background-color: var(--food-easy-primary);
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
   }

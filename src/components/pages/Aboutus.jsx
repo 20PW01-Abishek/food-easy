@@ -20,10 +20,12 @@ const Aboutus = () => {
   ];
 
   return (
-    <div>
-      <div className="text-center my-5 text-3xl">About us</div>
-      <div className="text-center my-5 text-xl">Just a pair of wierdos</div>
-      <div className="flex justify-center flex-wrap mt-10 space-x-4">
+    <div className="min-h-[60vh] py-12">
+      <div className="text-center mb-4">
+        <h1 className="text-4xl font-bold text-headingColor tracking-tight">About us</h1>
+        <p className="text-xl text-gray-600 mt-2">Just a pair of weirdos</p>
+      </div>
+      <div className="flex flex-wrap justify-center gap-8 mt-12 px-4">
         {profiles.map((profile, index) => (
           <ProfileCard
             key={index}

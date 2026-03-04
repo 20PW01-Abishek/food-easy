@@ -20,14 +20,14 @@ const MainContainer = () => {
 
       <section className="w-full my-6">
         <div className="w-full flex items-center justify-between">
-          <p className="text-2xl font-semibold capitalize text-headingColor relative before:absolute before:rounded-lg before:content before:w-32 before:h-1 before:-bottom-2 before:left-0 before:bg-gradient-to-tr from-blue-400 to-blue-600 transition-all ease-in-out duration-100">
+          <p className="text-2xl font-semibold capitalize text-headingColor relative before:absolute before:rounded-lg before:content before:w-32 before:h-1 before:-bottom-2 before:left-0 before:bg-gradient-to-tr from-foodEasyPrimary to-foodEasySecondary transition-all ease-in-out duration-100">
             What's healthier than Fresh Fruits ?
           </p>
 
           <div className="hidden md:flex gap-3 items-center">
             <motion.div
               whileTap={{ scale: 0.8 }}
-              className="w-8 h-8 rounded-lg bg-blue-300 hover:bg-blue-500 cursor-pointer  hover:shadow-lg flex items-center justify-center"
+              className="w-8 h-8 rounded-lg bg-foodEasyBorder hover:bg-foodEasyPrimary cursor-pointer  hover:shadow-lg flex items-center justify-center"
               onClick={() => {
                 if (directionChange) {
                   setDirectionChange(false);
@@ -41,7 +41,7 @@ const MainContainer = () => {
             </motion.div>
             <motion.div
               whileTap={{ scale: 0.8 }}
-              className="w-8 h-8 rounded-lg bg-blue-300 hover:bg-blue-500 cursor-pointer transition-all duration-100 ease-in-out hover:shadow-lg flex items-center justify-center"
+              className="w-8 h-8 rounded-lg bg-foodEasyBorder hover:bg-foodEasyPrimary cursor-pointer transition-all duration-100 ease-in-out hover:shadow-lg flex items-center justify-center"
               onClick={() => {
                 if (!directionChange) {
                   setDirectionChange(true);

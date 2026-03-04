@@ -96,7 +96,7 @@ const CartContainer = () => {
               <motion.button
                 whileTap={{ scale: 0.8 }}
                 type="button"
-                className="w-full p-2 rounded-full bg-gradient-to-tr from-blue-400 to-blue-600 text-gray-50 text-lg my-2 hover:shadow-lg"
+                className="w-full p-2 rounded-full bg-gradient-to-tr from-foodEasyPrimary to-foodEasySecondary text-gray-50 text-lg my-2 hover:shadow-lg"
               >
                 Check Out
               </motion.button>
@@ -104,7 +104,7 @@ const CartContainer = () => {
               <motion.button
                 whileTap={{ scale: 0.8 }}
                 type="button"
-                className="w-full p-2 rounded-full bg-gradient-to-tr from-blue-400 to-blue-600 text-gray-50 text-lg my-2 hover:shadow-lg"
+                className="w-full p-2 rounded-full bg-gradient-to-tr from-foodEasyPrimary to-foodEasySecondary text-gray-50 text-lg my-2 hover:shadow-lg"
               >
                 Login to check out
               </motion.button>
