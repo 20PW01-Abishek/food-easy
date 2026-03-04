@@ -5,11 +5,13 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from "../../firebase.config";
 import Logo from "../../img/logo.png";
 import Avatar from "../../img/avatar.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
 import { actionType } from "../../context/reducer";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
   const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
@@ -51,17 +53,38 @@ const Header = () => {
     });
   };
 
+  const scrollToTop = (e) => {
+    if (location.pathname !== "/") {
+      e?.preventDefault();
+      navigate("/");
+      setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 300);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const scrollToMenu = () => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        document.getElementById("menu")?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    } else {
+      document.getElementById("menu")?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const menuItems = (
     <motion.div
       initial={{ opacity: 0, scale: 0.6 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.6 }}
-      className="w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0"
+      className="w-40 bg-surface shadow-xl rounded-lg flex flex-col absolute top-12 right-0"
     >
       {user && user.email === process.env.REACT_APP_ADMIN_EMAIL && (
         <Link to="/create">
           <p
-            className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
+            className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-surfaceHover transition-all duration-100 ease-in-out text-textColor text-base"
             onClick={() => setIsMenu(false)}
           >
             New Item <MdAdd />
@@ -70,32 +93,46 @@ const Header = () => {
       )}
       <ul className="flex flex-col">
         <li
-          className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2"
-          onClick={() => setIsMenu(false)}
+          className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-surfaceHover px-4 py-2"
+          onClick={() => {
+            setIsMenu(false);
+            scrollToTop();
+          }}
         >
-          <Link to="/">Home</Link>
+          <Link
+            to="/"
+            onClick={(e) => location.pathname !== "/" && e.preventDefault()}
+          >
+            Home
+          </Link>
+        </li>
+        <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-surfaceHover px-4 py-2">
+          <Link
+            to="/"
+            onClick={(e) => {
+              e.preventDefault();
+              setIsMenu(false);
+              scrollToMenu();
+            }}
+          >
+            Menu
+          </Link>
         </li>
         <li
-          className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2"
-          onClick={() => setIsMenu(false)}
-        >
-          <Link to="/#menu">Menu</Link>
-        </li>
-        <li
-          className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2"
-          onClick={() => setIsMenu(false)}
-        >
-          <Link to="/aboutus">About Us</Link>
-        </li>
-        <li
-          className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2"
+          className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-surfaceHover px-4 py-2"
           onClick={() => setIsMenu(false)}
         >
           <Link to="/services">Services</Link>
         </li>
+        <li
+          className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-surfaceHover px-4 py-2"
+          onClick={() => setIsMenu(false)}
+        >
+          <Link to="/aboutus">About Us</Link>
+        </li>
       </ul>
       <p
-        className="m-2 p-2 rounded-md shadow-md flex items-center justify-center bg-gray-200 gap-3 cursor-pointer hover:bg-gray-300 transition-all duration-100 ease-in-out text-textColor text-base"
+        className="m-2 p-2 rounded-md shadow-md flex items-center justify-center bg-surfaceHover gap-3 cursor-pointer hover:bg-surfaceHoverDarker transition-all duration-100 ease-in-out text-textColor text-base"
         onClick={logout}
       >
         Logout <MdLogout />
@@ -104,38 +141,56 @@ const Header = () => {
   );
 
   return (
-    <header className="fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16 bg-foodEasyLite drop-shadow-md">
-      {/* Desktop & Tablet */}
-      <div className="hidden md:flex w-full h-full items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <img src={Logo} className="w-8 object-cover" alt="Foodeasy Logo" />
-          <p className="text-headingColor text-xl font-bold">Foodeasy</p>
-        </Link>
-        <div className="flex items-center gap-8">
+    <header className="fixed z-50 w-screen p-3 px-4 sm:p-4 sm:px-6 md:p-6 md:px-16 bg-foodEasyLite drop-shadow-md">
+      <div className="flex items-center justify-between w-full h-full gap-2 sm:gap-6">
+        <div className="flex items-center gap-2">
+          <Link to="/" className="flex-shrink-0">
+            <img src={Logo} alt="Foodeasy" className="w-10 h-10" />
+          </Link>
+          <p className="text-xl font-bold">
+            <span className="text-foodEasyPrimary">Food</span>{" "}
+            <span className="text-textColor">Easy</span>
+          </p>
+        </div>
+
+        <nav className="hidden sm:flex items-center gap-6 lg:gap-12">
           <motion.ul
             initial={{ opacity: 0, x: 200 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 200 }}
-            className="flex items-center gap-24"
+            className="flex items-center gap-6 lg:gap-12"
           >
-            <li className="hover-underline-animation text-lg text-textColor hover:text-foodEasyHover duration-100 transition-all ease-in-out cursor-pointer">
-              <Link to="/">Home</Link>
+            <li className="hover-underline-animation text-base lg:text-lg text-textColor hover:text-foodEasyHover duration-100 transition-all ease-in-out cursor-pointer">
+              <Link to="/" onClick={(e) => scrollToTop(e)}>
+                Home
+              </Link>
             </li>
-            <li className="hover-underline-animation text-lg text-textColor hover:text-foodEasyHover duration-100 transition-all ease-in-out cursor-pointer">
-              <Link to="/#menu">Menu</Link>
+            <li className="hover-underline-animation text-base lg:text-lg text-textColor hover:text-foodEasyHover duration-100 transition-all ease-in-out cursor-pointer">
+              <Link
+                to="/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToMenu();
+                }}
+              >
+                Menu
+              </Link>
             </li>
-            <li className="hover-underline-animation text-lg text-textColor hover:text-foodEasyHover duration-100 transition-all ease-in-out cursor-pointer">
-              <Link to="/aboutus">About Us</Link>
-            </li>
-            <li className="hover-underline-animation text-lg text-textColor hover:text-foodEasyHover duration-100 transition-all ease-in-out cursor-pointer">
+            <li className="hover-underline-animation text-base lg:text-lg text-textColor hover:text-foodEasyHover duration-100 transition-all ease-in-out cursor-pointer">
               <Link to="/services">Services</Link>
             </li>
+            <li className="hover-underline-animation text-base lg:text-lg text-textColor hover:text-foodEasyHover duration-100 transition-all ease-in-out cursor-pointer">
+              <Link to="/aboutus">About Us</Link>
+            </li>
           </motion.ul>
+        </nav>
+
+        <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
           <div
-            className="relative flex items-center justify-center"
+            className="relative flex items-center justify-center cursor-pointer"
             onClick={showCart}
           >
-            <MdShoppingBasket className="text-textColor text-2xl cursor-pointer" />
+            <MdShoppingBasket className="text-textColor text-xl sm:text-2xl" />
             {cartItems && cartItems.length > 0 && (
               <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-foodEasyPrimary flex items-center justify-center">
                 <p className="text-xs text-white font-semibold">
@@ -148,43 +203,12 @@ const Header = () => {
             <motion.img
               whileTap={{ scale: 0.6 }}
               src={user ? user.photoURL : Avatar}
-              className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer rounded-full"
+              className="w-9 h-9 sm:w-10 sm:h-10 min-w-[36px] min-h-[36px] drop-shadow-xl cursor-pointer rounded-full object-cover"
               alt="User Profile"
               onClick={login}
             />
             {isMenu && menuItems}
           </div>
-        </div>
-      </div>
-
-      {/* Mobile */}
-      <div className="flex items-center justify-between md:hidden w-full h-full">
-        <div
-          className="relative flex items-center justify-center"
-          onClick={showCart}
-        >
-          <MdShoppingBasket className="text-textColor text-2xl cursor-pointer" />
-          {cartItems && cartItems.length > 0 && (
-            <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-foodEasyPrimary flex items-center justify-center">
-              <p className="text-xs text-white font-semibold">
-                {cartItems.length}
-              </p>
-            </div>
-          )}
-        </div>
-        <Link to="/" className="flex items-center gap-2">
-          <img src={Logo} className="w-8 object-cover" alt="Foodeasy Logo" />
-          <p className="text-headingColor text-xl font-bold">FoodEasy</p>
-        </Link>
-        <div className="relative">
-          <motion.img
-            whileTap={{ scale: 0.6 }}
-            src={user ? user.photoURL : Avatar}
-            className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer rounded-full"
-            alt="User Profile"
-            onClick={login}
-          />
-          {isMenu && menuItems}
         </div>
       </div>
     </header>

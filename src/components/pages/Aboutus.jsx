@@ -1,34 +1,74 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ProfileCard from "./ProfileCard";
 
+const GITHUB_USERNAMES = ["20pw01-Abishek", "tri-m"];
+
 const Aboutus = () => {
-  const profiles = [
-    {
-      name: "Abishek A",
-      image: "https://avatars.githubusercontent.com/20pw01-Abishek",
-      description: "Software Systems",
-      email: "20pw01@psgtech.ac.in",
-      github: "https://github.com/20pw01-Abishek",
-    },
-    {
-      name: "Trisha M",
-      image: "https://avatars.githubusercontent.com/tri-m",
-      description: "Software Systems",
-      email: "20pw39@psgtech.ac.in",
-      github: "https://github.com/tri-m",
-    },
-  ];
+  const [profiles, setProfiles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProfiles = async () => {
+      try {
+        const results = await Promise.all(
+          GITHUB_USERNAMES.map(async (username) => {
+            const res = await fetch(`https://api.github.com/users/${username}`);
+            if (!res.ok) throw new Error(`Failed to fetch ${username}`);
+            const data = await res.json();
+            return {
+              name: data.name || data.login,
+              image: data.avatar_url,
+              description: data.bio || "",
+              email: data.email || "",
+              github: data.html_url,
+            };
+          }),
+        );
+        setProfiles(results);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProfiles();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[40vh]">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-2 border-foodEasyPrimary border-t-transparent rounded-full animate-spin" />
+          <p className="text-sm text-muted">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-[40vh]">
+        <p className="text-sm text-muted">Unable to load profiles.</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-[60vh] py-12">
-      <div className="text-center mb-4">
-        <h1 className="text-4xl font-bold text-headingColor tracking-tight">About us</h1>
-        <p className="text-xl text-gray-600 mt-2">Just a pair of weirdos</p>
-      </div>
-      <div className="flex flex-wrap justify-center gap-8 mt-12 px-4">
-        {profiles.map((profile, index) => (
+    <section className="max-w-4xl mx-auto py-16 md:py-24">
+      <header className="text-center mb-16">
+        <h1 className="text-2xl md:text-3xl font-semibold text-headingColor tracking-tight">
+          About us
+        </h1>
+        <p className="mt-2 text-sm text-muted max-w-md mx-auto">
+          The people behind Food Easy
+        </p>
+      </header>
+
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-8 md:gap-12">
+        {profiles.map((profile) => (
           <ProfileCard
-            key={index}
+            key={profile.github}
             name={profile.name}
             image={profile.image}
             description={profile.description}
@@ -37,7 +77,7 @@ const Aboutus = () => {
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

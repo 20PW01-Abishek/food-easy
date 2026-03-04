@@ -59,8 +59,8 @@ const CartItem = ({ item, setFlag, flag }) => {
       />
 
       <div className="flex flex-col gap-2">
-        <p className="text-base text-gray-50">{item?.title}</p>
-        <p className="text-sm block text-gray-300 font-semibold">
+        <p className="text-base text-white">{item?.title}</p>
+        <p className="text-sm block text-mutedLight font-semibold">
           $ {parseFloat(item?.price) * qty}
         </p>
       </div>
@@ -70,10 +70,10 @@ const CartItem = ({ item, setFlag, flag }) => {
           whileTap={{ scale: 0.75 }}
           onClick={() => updateQty("remove", item?.id)}
         >
-          <BiMinus className="text-gray-50 " />
+          <BiMinus className="text-white " />
         </motion.div>
 
-        <p className="w-5 h-5 rounded-sm bg-cartBg text-gray-50 flex items-center justify-center">
+        <p className="w-5 h-5 rounded-sm bg-cartBg text-white flex items-center justify-center">
           {qty}
         </p>
 
@@ -81,7 +81,7 @@ const CartItem = ({ item, setFlag, flag }) => {
           whileTap={{ scale: 0.75 }}
           onClick={() => updateQty("add", item?.id)}
         >
-          <BiPlus className="text-gray-50 " />
+          <BiPlus className="text-white " />
         </motion.div>
       </div>
     </div>

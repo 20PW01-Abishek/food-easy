@@ -28,7 +28,7 @@ const Service = ({ title, description, bgColor, btnColor }) => {
       className={`relative ${bgColor} text-white p-8 rounded-lg shadow-xl w-80 flex flex-col items-center text-center`}
     >
       <div className="flex flex-col items-center flex-grow">
-        <div className="icon bg-white text-gray-800 p-5 rounded-full mb-4">
+        <div className="icon bg-white text-headingColor p-5 rounded-full mb-4">
           <FontAwesomeIcon icon={faHamburger} className="text-3xl" />
         </div>
         <h2 className="text-2xl font-semibold">{title}</h2>
@@ -48,7 +48,7 @@ const Service = ({ title, description, bgColor, btnColor }) => {
 const Services = () => {
   return (
     <div className="font-sans container mx-auto mb-10">
-      <h2 className="my-10 text-3xl text-center text-foodEasySecondary font-semibold">
+      <h2 className="my-10 text-3xl text-center text-foodEasyPrimary font-semibold">
         Our Branches
       </h2>
       <div className="flex justify-center mt-8 space-x-6">
@@ -60,7 +60,7 @@ const Services = () => {
         <Branch
           title="Coimbatore"
           mapSrc="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62658.61205187147!2d76.97263665468098!3d11.026375414006537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba8582ef9523359%3A0xa1ebf8112c5c931a!2sPsg%20Institute%20Of%20Technology%20And%20Applied%20Research!5e0!3m2!1sen!2sin!4v1654685618509!5m2!1sen!2sin"
-          bgColor="bg-gray-800"
+          bgColor="bg-darkSurface"
         />
         <Branch
           title="Trichy"
@@ -68,26 +68,26 @@ const Services = () => {
           bgColor="bg-foodEasyPrimary"
         />
       </div>
-      <h2 className="text-3xl mt-10 text-center text-foodEasySecondary font-semibold">
+      <h2 className="text-3xl mt-10 text-center text-foodEasyPrimary font-semibold">
         Our Services
       </h2>
       <div className="flex justify-center mt-10 space-x-6">
         <Service
           title="Door Delivery"
           description="Fastest Delivery in the city"
-          bgColor="bg-gray-800"
+          bgColor="bg-darkSurface"
           btnColor="bg-foodEasyPrimary text-white hover:bg-foodEasyHover"
         />
         <Service
           title="Party Orders"
           description="Hosting a party? Don't hesitate!"
           bgColor="bg-foodEasyPrimary"
-          btnColor="bg-white text-gray-800 hover:bg-foodEasyHover hover:text-white"
+          btnColor="bg-white text-headingColor hover:bg-foodEasyHover hover:text-white"
         />
         <Service
           title="Catering"
           description="Preparing food in bulk is our jam"
-          bgColor="bg-gray-800"
+          bgColor="bg-darkSurface"
           btnColor="bg-foodEasyPrimary text-white hover:bg-foodEasyHover"
         />
       </div>

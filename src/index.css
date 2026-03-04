@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
 :root {
-  --food-easy-primary: #3b82f6;
-  --food-easy-secondary: #2563eb;
+  --food-easy-primary: #1c83d7;
   --food-easy-lite: #eff6ff;
   --food-easy-hover: #1d4ed8;
   --food-easy-border: #93c5fd;
@@ -40,9 +39,12 @@ body{
     transform: scaleX(1);
     transform-origin: bottom left;
   }
-html,body{
-    scroll-behavior: smooth;
-    overflow-x: hidden;
+html, body, #root {
+  min-height: 0;
+}
+html, body {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 @tailwind base;
 @tailwind components;
