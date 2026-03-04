@@ -1,12 +1,15 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHamburger } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHamburger } from "@fortawesome/free-solid-svg-icons";
 
 const Branch = ({ title, mapSrc, bgColor }) => {
   return (
-    <div className={`relative ${bgColor} text-white p-6 rounded-lg shadow-xl w-80 h-96 flex flex-col items-center`}>
+    <div
+      className={`relative ${bgColor} text-white p-6 rounded-lg shadow-xl w-80 h-96 flex flex-col items-center`}
+    >
       <h3 className="text-xl font-semibold mb-4">{title}</h3>
       <iframe
+        title={`${title} branch map`}
         src={mapSrc}
         width="100%"
         height="80%"
@@ -14,14 +17,16 @@ const Branch = ({ title, mapSrc, bgColor }) => {
         allowFullScreen=""
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
-      ></iframe>
+      />
     </div>
   );
 };
 
 const Service = ({ title, description, bgColor, btnColor }) => {
   return (
-    <div className={`relative ${bgColor} text-white p-8 rounded-lg shadow-xl w-80 flex flex-col items-center text-center`}>
+    <div
+      className={`relative ${bgColor} text-white p-8 rounded-lg shadow-xl w-80 flex flex-col items-center text-center`}
+    >
       <div className="flex flex-col items-center flex-grow">
         <div className="icon bg-white text-gray-800 p-5 rounded-full mb-4">
           <FontAwesomeIcon icon={faHamburger} className="text-3xl" />
@@ -30,7 +35,12 @@ const Service = ({ title, description, bgColor, btnColor }) => {
         <hr className="border-t border-white w-3/4 my-4" />
         <p className="text-lg">{description}</p>
       </div>
-      <a href="#" className={`mt-3 ${btnColor} py-2 px-4 rounded-full font-semibold hover:bg-blue-700`}>Read More</a>
+      <button
+        type="button"
+        className={`mt-3 ${btnColor} py-2 px-4 rounded-full font-semibold hover:bg-blue-700 border-none cursor-pointer`}
+      >
+        Read More
+      </button>
     </div>
   );
 };
@@ -38,7 +48,9 @@ const Service = ({ title, description, bgColor, btnColor }) => {
 const Services = () => {
   return (
     <div className="font-sans container mx-auto mb-10">
-      <h2 className="my-10 text-3xl text-center text-blue-900 font-semibold">Our Branches</h2>
+      <h2 className="my-10 text-3xl text-center text-blue-900 font-semibold">
+        Our Branches
+      </h2>
       <div className="flex justify-center mt-8 space-x-6">
         <Branch
           title="Chennai"
@@ -56,7 +68,9 @@ const Services = () => {
           bgColor="bg-blue-500"
         />
       </div>
-      <h2 className="text-3xl mt-10 text-center text-blue-900 font-semibold">Our Services</h2>
+      <h2 className="text-3xl mt-10 text-center text-blue-900 font-semibold">
+        Our Services
+      </h2>
       <div className="flex justify-center mt-10 space-x-6">
         <Service
           title="Door Delivery"

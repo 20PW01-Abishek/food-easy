@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import { motion } from "framer-motion";
-import { useStateValue } from "../context/StateProvider";
-import { actionType } from "../context/reducer";
+import { useStateValue } from "../../context/StateProvider";
+import { actionType } from "../../context/reducer";
 
 let items = [];
 
@@ -19,26 +19,25 @@ const CartItem = ({ item, setFlag, flag }) => {
   };
 
   const updateQty = (action, id) => {
-    if (action == "add") {
+    if (action === "add") {
       setQty(qty + 1);
-      cartItems.map((item) => {
-        if (item.id === id) {
-          item.qty += 1;
+      cartItems.forEach((cartItem) => {
+        if (cartItem.id === id) {
+          cartItem.qty += 1;
           setFlag(flag + 1);
         }
       });
       cartDispatch();
     } else {
-      // initial state value is one so you need to check if 1 then remove it
-      if (qty == 1) {
+      if (qty === 1) {
         items = cartItems.filter((item) => item.id !== id);
         setFlag(flag + 1);
         cartDispatch();
       } else {
         setQty(qty - 1);
-        cartItems.map((item) => {
-          if (item.id === id) {
-            item.qty -= 1;
+        cartItems.forEach((cartItem) => {
+          if (cartItem.id === id) {
+            cartItem.qty -= 1;
             setFlag(flag + 1);
           }
         });
@@ -49,7 +48,7 @@ const CartItem = ({ item, setFlag, flag }) => {
 
   useEffect(() => {
     items = cartItems;
-  }, [qty, items]);
+  }, [cartItems]);
 
   return (
     <div className="w-full p-1 px-2 rounded-lg bg-cartItem flex items-center gap-2">
@@ -59,7 +58,6 @@ const CartItem = ({ item, setFlag, flag }) => {
         alt=""
       />
 
-      {/* name section */}
       <div className="flex flex-col gap-2">
         <p className="text-base text-gray-50">{item?.title}</p>
         <p className="text-sm block text-gray-300 font-semibold">
@@ -67,7 +65,6 @@ const CartItem = ({ item, setFlag, flag }) => {
         </p>
       </div>
 
-      {/* button section */}
       <div className="group flex items-center gap-2 ml-auto cursor-pointer">
         <motion.div
           whileTap={{ scale: 0.75 }}

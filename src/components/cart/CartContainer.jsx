@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { FiMinimize2 } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { useStateValue } from "../context/StateProvider";
-import { actionType } from "../context/reducer";
-import EmptyCart from "../img/emptyCart.svg";
+import { useStateValue } from "../../context/StateProvider";
+import { actionType } from "../../context/reducer";
+import EmptyCart from "../../img/emptyCart.svg";
 import CartItem from "./CartItem";
 
 const CartContainer = () => {
@@ -20,12 +20,12 @@ const CartContainer = () => {
   };
 
   useEffect(() => {
-    let totalPrice = cartItems.reduce(function (accumulator, item) {
-      return accumulator + item.qty * item.price;
-    }, 0);
+    const totalPrice = cartItems.reduce(
+      (accumulator, item) => accumulator + item.qty * item.price,
+      0,
+    );
     setTot(totalPrice);
-    console.log(tot);
-  }, [tot, flag]);
+  }, [cartItems, flag]);
 
   const clearCart = () => {
     dispatch({
@@ -58,12 +58,9 @@ const CartContainer = () => {
         </motion.p>
       </div>
 
-      {/* bottom section */}
       {cartItems && cartItems.length > 0 ? (
         <div className="w-full h-full bg-cartBg rounded-t-[2rem] flex flex-col">
-          {/* cart Items section */}
           <div className="w-full h-340 md:h-42 px-6 py-10 flex flex-col gap-3 overflow-y-scroll scrollbar-none">
-            {/* cart Item */}
             {cartItems &&
               cartItems.length > 0 &&
               cartItems.map((item) => (
@@ -76,7 +73,6 @@ const CartContainer = () => {
               ))}
           </div>
 
-          {/* cart total section */}
           <div className="w-full flex-1 bg-cartTotal rounded-t-[2rem] flex flex-col items-center justify-evenly px-8 py-2">
             <div className="w-full flex items-center justify-between">
               <p className="text-gray-400 text-lg">Sub Total</p>
@@ -109,7 +105,6 @@ const CartContainer = () => {
                 whileTap={{ scale: 0.8 }}
                 type="button"
                 className="w-full p-2 rounded-full bg-gradient-to-tr from-blue-400 to-blue-600 text-gray-50 text-lg my-2 hover:shadow-lg"
-
               >
                 Login to check out
               </motion.button>

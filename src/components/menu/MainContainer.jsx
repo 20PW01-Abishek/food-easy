@@ -1,18 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import HomeContainer from "./HomeContainer";
 import { motion } from "framer-motion";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import RowContainer from "./RowContainer";
-import { useStateValue } from "../context/StateProvider";
+import { useStateValue } from "../../context/StateProvider";
 import MenuContainer from "./MenuContainer";
-import CartContainer from "./CartContainer";
+import CartContainer from "../cart/CartContainer";
 
 const MainContainer = () => {
-  const [{ foodItems, cartShow }, dispatch] = useStateValue();
+  const [{ foodItems, cartShow }] = useStateValue();
   const [scrollValue, setScrollValue] = useState(0);
   const [directionChange, setDirectionChange] = useState(false);
 
-  useEffect(() => { }, [scrollValue, cartShow]);
+  useEffect(() => {}, [scrollValue, cartShow]);
 
   return (
     <div className="w-full h-auto flex flex-col items-center justify-center ">
@@ -33,7 +33,7 @@ const MainContainer = () => {
                   setDirectionChange(false);
                   setScrollValue(-300);
                 } else {
-                  setScrollValue(scrollValue - (300));
+                  setScrollValue(scrollValue - 300);
                 }
               }}
             >
@@ -47,7 +47,7 @@ const MainContainer = () => {
                   setDirectionChange(true);
                   setScrollValue(0 + 300);
                 } else {
-                  setScrollValue(scrollValue + (300));
+                  setScrollValue(scrollValue + 300);
                 }
               }}
             >

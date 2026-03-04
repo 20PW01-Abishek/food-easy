@@ -1,3 +1,4 @@
+import React from "react";
 import { fetchCart, fetchUser } from "../utils/fetchLocalStorageData";
 
 const userInfo = fetchUser();

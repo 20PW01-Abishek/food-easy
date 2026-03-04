@@ -1,3 +1,5 @@
+import React from "react";
+
 export const fetchUser = () => {
   const userInfo =
     localStorage.getItem("user") !== "undefined"

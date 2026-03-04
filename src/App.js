@@ -1,29 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { CreateContainer, Header, MainContainer, Services, Aboutus } from "./components";
+import {
+  CreateContainer,
+  Header,
+  MainContainer,
+  Services,
+  Aboutus,
+} from "./components";
 import { useStateValue } from "./context/StateProvider";
 import { getAllFoodItems } from "./utils/firebaseFunctions";
 import { actionType } from "./context/reducer";
 
 const App = () => {
+  const [, dispatch] = useStateValue();
+
   useEffect(() => {
     document.title = "Foodeasy";
   }, []);
-  const [{ foodItems }, dispatch] = useStateValue();
 
-  const fetchData = async () => {
-    await getAllFoodItems().then((data) => {
-      dispatch({
-        type: actionType.SET_FOOD_ITEMS,
-        foodItems: data,
-      });
+  const fetchData = useCallback(async () => {
+    const data = await getAllFoodItems();
+    dispatch({
+      type: actionType.SET_FOOD_ITEMS,
+      foodItems: data,
     });
-  };
+  }, [dispatch]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <AnimatePresence exitBeforeEnter>

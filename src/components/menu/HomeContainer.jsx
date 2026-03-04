@@ -1,6 +1,6 @@
 import React from "react";
-import Delivery from "../img/delivery.png";
-import { heroData } from "../utils/data";
+import Delivery from "../../img/delivery.png";
+import { heroData } from "../../utils/data";
 
 const HomeContainer = () => {
   return (
@@ -10,9 +10,7 @@ const HomeContainer = () => {
     >
       <div className="py-2 flex-1 flex flex-col items-start justify-center gap-6">
         <div className="flex items-center gap-2 justify-center hover:scale-125 bg-blue-100 px-4 py-1 rounded-full">
-          <p className="text-base text-blue-500 font-semibold">
-            Bike Delivery
-          </p>
+          <p className="text-base text-blue-500 font-semibold">Bike Delivery</p>
           <div className="w-8 h-8 bg-white rounded-full overflow-hidden drop-shadow-xl">
             <img
               src={Delivery}
@@ -30,22 +28,28 @@ const HomeContainer = () => {
         </p>
 
         <p className="text-base text-textColor text-center md:text-left md:w-[80%]">
-          FoodEasy is perhaps one of the emerging food outlets and eateries in Tamilnadu. We offer a variety of products and food items at nominal rates. We are also very much heath conscious and all the dishes are prepared with much care and love. The fruits that you see are grown in our own farm in an organic way. So, why wait? We are here to deliver everything at your door step !!!
+          FoodEasy is perhaps one of the emerging food outlets and eateries in
+          Tamilnadu. We offer a variety of products and food items at nominal
+          rates. We are also very much heath conscious and all the dishes are
+          prepared with much care and love. The fruits that you see are grown in
+          our own farm in an organic way. So, why wait? We are here to deliver
+          everything at your door step !!!
         </p>
 
         <button
           type="button"
           className="bg-gradient-to-br from-blue-400 to-blue-500 w-full md:w-auto px-4 py-2  rounded-lg hover:shadow-lg hover:scale-110 transition-all ease-in-out duration-100"
         >
-          <a href="#menu" className="text-white">Order now</a>
+          <a href="#menu" className="text-white">
+            Order now
+          </a>
         </button>
       </div>
       <div className="flex items-center relative">
         <div
           className="mx-5 w-full h-650"
-          style={{ background: 'linear-gradient(to bottom, #03B7F2, #FFFFFF)', }}
-        >
-        </div>
+          style={{ background: "linear-gradient(to bottom, #03B7F2, #FFFFFF)" }}
+        ></div>
 
         <div className="w-full h-full absolute top-0 left-0 flex items-center justify-center lg:px-32 py-10 my-5 gap-4 flex-wrap">
           {heroData &&

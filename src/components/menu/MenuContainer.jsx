@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import { IoFastFood } from "react-icons/io5";
-import { categories } from "../utils/data";
+import { categories } from "../../utils/data";
 import { motion } from "framer-motion";
 import RowContainer from "./RowContainer";
-import { useStateValue } from "../context/StateProvider";
+import { useStateValue } from "../../context/StateProvider";
 
 const MenuContainer = () => {
   const [filter, setFilter] = useState("chicken");
 
-  const [{ foodItems }, dispatch] = useStateValue();
+  const [{ foodItems }] = useStateValue();
 
   return (
     <section className="w-full my-6" id="menu">
-      <div id="hot" className="w-full flex flex-col items-center justify-center">
-        <p className= "text-2xl font-semibold capitalize text-black relative before:absolute before:rounded-lg before:content before:w-16 before:h-1 before:-bottom-2 before:left-0 before:bg-gradient-to-tr from-blue-400 to-blue-600 transition-all ease-in-out duration-100 mr-auto">
+      <div
+        id="hot"
+        className="w-full flex flex-col items-center justify-center"
+      >
+        <p className="text-2xl font-semibold capitalize text-black relative before:absolute before:rounded-lg before:content before:w-16 before:h-1 before:-bottom-2 before:left-0 before:bg-gradient-to-tr from-blue-400 to-blue-600 transition-all ease-in-out duration-100 mr-auto">
           Our Menu
         </p>
 
@@ -22,7 +25,7 @@ const MenuContainer = () => {
             categories.map((category) => (
               <motion.div
                 whileTap={{ scale: 0.75 }}
-                whileHover={{scale: 1.2}}
+                whileHover={{ scale: 1.2 }}
                 key={category.id}
                 className={`group ${
                   filter === category.urlParamName ? "bg-cartNumBg" : "bg-card"

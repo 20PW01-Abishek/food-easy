@@ -1,21 +1,21 @@
-import React from 'react';
-import ProfileCard from './ProfileCard';
+import React from "react";
+import ProfileCard from "./ProfileCard";
 
 const Aboutus = () => {
   const profiles = [
     {
-      name: 'Abishek A',
-      image: 'https://avatars.githubusercontent.com/20pw01-Abishek',
-      description: 'Software Systems',
-      email: '20pw01@psgtech.ac.in',
-      github: 'https://github.com/20pw01-Abishek',
+      name: "Abishek A",
+      image: "https://avatars.githubusercontent.com/20pw01-Abishek",
+      description: "Software Systems",
+      email: "20pw01@psgtech.ac.in",
+      github: "https://github.com/20pw01-Abishek",
     },
     {
-      name: 'Trisha M',
-      image: 'https://avatars.githubusercontent.com/tri-m',
-      description: 'Software Systems',
-      email: '20pw39@psgtech.ac.in',
-      github: 'https://github.com/tri-m',
+      name: "Trisha M",
+      image: "https://avatars.githubusercontent.com/tri-m",
+      description: "Software Systems",
+      email: "20pw39@psgtech.ac.in",
+      github: "https://github.com/tri-m",
     },
   ];
 

@@ -1,3 +1,4 @@
+import React from "react";
 import {
   collection,
   doc,
@@ -18,7 +19,7 @@ export const saveItem = async (data) => {
 // getall food items
 export const getAllFoodItems = async () => {
   const items = await getDocs(
-    query(collection(firestore, "foodItems"), orderBy("id", "desc"))
+    query(collection(firestore, "foodItems"), orderBy("id", "desc")),
   );
 
   return items.docs.map((doc) => doc.data());

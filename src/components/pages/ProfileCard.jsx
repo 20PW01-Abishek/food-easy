@@ -1,9 +1,13 @@
-import React from 'react';
+import React from "react";
 
 const ProfileCard = ({ name, image, description, email, github }) => {
   return (
     <div className="group text-white bg-beforeHover rounded-lg shadow-lg p-6 w-72 hover:bg-afterHover hover:text-black hover:scale-105 transform transition duration-500">
-      <img className="rounded-full mx-auto w-24 border-2 border-white group-hover:bg-beforeHover transition duration-500" src={image} alt={name} />
+      <img
+        className="rounded-full mx-auto w-24 border-2 border-white group-hover:bg-beforeHover transition duration-500"
+        src={image}
+        alt={name}
+      />
       <div className="text-center mt-6">
         <h2 className="text-center text-xl font-semibold">{name}</h2>
         <hr className="my-4 border-white group-hover:border-black transition duration-500" />
