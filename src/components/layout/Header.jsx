@@ -145,7 +145,7 @@ const Header = () => {
       <div className="flex items-center justify-between w-full h-full gap-2 sm:gap-6">
         <div className="flex items-center gap-2">
           <Link to="/" className="flex-shrink-0">
-            <img src={Logo} alt="Foodeasy" className="w-10 h-10" />
+            <img src={Logo} alt="Food Easy" className="w-10 h-10" />
           </Link>
           <p className="text-xl font-bold">
             <span className="text-foodEasyPrimary">Food</span>{" "}

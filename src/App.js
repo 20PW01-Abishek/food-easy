@@ -16,7 +16,7 @@ const App = () => {
   const [, dispatch] = useStateValue();
 
   useEffect(() => {
-    document.title = "Foodeasy";
+    document.title = "Food Easy";
   }, []);
 
   const fetchData = useCallback(async () => {
