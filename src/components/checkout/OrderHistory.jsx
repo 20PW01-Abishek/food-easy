@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { MdAccessTime, MdLocationOn, MdPhone, MdShoppingBag } from "react-icons/md";
+import {
+  MdAccessTime,
+  MdLocationOn,
+  MdPhone,
+  MdShoppingBag,
+} from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 import { useStateValue } from "../../context/StateContext";
@@ -23,10 +28,8 @@ const OrderHistory = () => {
       navigate("/");
       return;
     }
-    console.log("Fetching orders for uid:", user.uid);
     getUserOrders(user.uid)
       .then((data) => {
-        console.log("Orders fetched:", data);
         setOrders(data);
       })
       .catch((err) => {
@@ -118,7 +121,10 @@ const OrderHistory = () => {
                 <div className="border-t border-border pt-3 flex flex-col gap-1 text-sm">
                   {order.location?.address && (
                     <div className="flex items-start gap-1 text-muted">
-                      <MdLocationOn size={16} className="mt-0.5 flex-shrink-0 text-foodEasyPrimary" />
+                      <MdLocationOn
+                        size={16}
+                        className="mt-0.5 flex-shrink-0 text-foodEasyPrimary"
+                      />
                       <span>{order.location.address}</span>
                     </div>
                   )}
@@ -132,7 +138,8 @@ const OrderHistory = () => {
 
                 <div className="flex justify-between items-center pt-1">
                   <span className="text-sm text-muted">
-                    {order.items.length} item{order.items.length !== 1 ? "s" : ""}
+                    {order.items.length} item
+                    {order.items.length !== 1 ? "s" : ""}
                   </span>
                   <span className="text-base font-semibold text-foodEasyPrimary">
                     Total: ${order.total?.toFixed(2)}

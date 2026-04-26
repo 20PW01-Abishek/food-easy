@@ -40,7 +40,7 @@ const CreateItem = () => {
       "state_changed",
       () => {},
       (error) => {
-        console.log(error);
+        console.error(error);
         setFields(true);
         setMsg("Error occurred while uploading, please try again");
         setAlertStatus("danger");
@@ -78,7 +78,7 @@ const CreateItem = () => {
         }, 4000);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         setFields(true);
         setMsg("Error occurred while deleting file. Please try again");
         setAlertStatus("danger");
@@ -125,7 +125,7 @@ const CreateItem = () => {
         clearData();
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

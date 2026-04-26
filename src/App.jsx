@@ -11,7 +11,7 @@ import {
   Services,
 } from "./components";
 import { actionType } from "./context/reducer";
-import { useStateValue } from "./context/StateProvider";
+import { useStateValue } from "./context/StateContext";
 import { getAllFoodItems } from "./utils/firebaseFunctions";
 
 const App = () => {
