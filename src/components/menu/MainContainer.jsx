@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
-import { useStateValue } from "../../context/StateProvider";
+import { useStateValue } from "../../context/StateContext";
 import CartContainer from "../cart/CartContainer";
 import HomeContainer from "./HomeContainer";
 import MenuContainer from "./MenuContainer";

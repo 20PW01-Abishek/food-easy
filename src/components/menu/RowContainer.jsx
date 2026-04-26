@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { MdShoppingBasket } from "react-icons/md";
 
 import { actionType } from "../../context/reducer";
-import { useStateValue } from "../../context/StateProvider";
+import { useStateValue } from "../../context/StateContext";
 import NotFound from "../../img/NotFound.svg";
 
 const RowContainer = ({ flag, data, scrollValue }) => {

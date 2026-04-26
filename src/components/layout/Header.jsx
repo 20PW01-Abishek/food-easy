@@ -10,7 +10,7 @@ import { MdAdd, MdLogout,MdShoppingBasket } from "react-icons/md";
 import { Link, useLocation,useNavigate } from "react-router-dom";
 
 import { actionType } from "../../context/reducer";
-import { useStateValue } from "../../context/StateProvider";
+import { useStateValue } from "../../context/StateContext";
 import { app } from "../../firebase.config";
 import Avatar from "../../img/avatar.png";
 import Logo from "../../img/logo.png";

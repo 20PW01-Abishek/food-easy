@@ -7,7 +7,7 @@ import { MdClose, MdLocationOn, MdMyLocation,MdPhone } from "react-icons/md";
 import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 
 import { actionType } from "../../context/reducer";
-import { useStateValue } from "../../context/StateProvider";
+import { useStateValue } from "../../context/StateContext";
 import { saveOrder } from "../../utils/firebaseFunctions";
 
 // Fix default leaflet marker icons broken by webpack

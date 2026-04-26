@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { IoFastFood } from "react-icons/io5";
 
-import { useStateValue } from "../../context/StateProvider";
+import { useStateValue } from "../../context/StateContext";
 import { categories } from "../../utils/data";
 import RowContainer from "./RowContainer";
 

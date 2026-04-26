@@ -1,30 +1,26 @@
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { FiMinimize2 } from "react-icons/fi";
 import { MdDeleteForever } from "react-icons/md";
 
 import { actionType } from "../../context/reducer";
-import { useStateValue } from "../../context/StateProvider";
+import { useStateValue } from "../../context/StateContext";
 import EmptyCart from "../../img/emptyCart.svg";
 import { CheckoutModal } from "../checkout";
 import CartItem from "./CartItem";
 
 const CartContainer = () => {
   const [{ cartShow, cartItems, user }, dispatch] = useStateValue();
-  const [flag, setFlag] = useState(1);
-  const [tot, setTot] = useState(0);
   const [showCheckout, setShowCheckout] = useState(false);
 
   const showCart = () => {
     dispatch({ type: actionType.SET_CART_SHOW, cartShow: !cartShow });
   };
 
-  useEffect(() => {
-    const totalPrice = cartItems.reduce(
-      (acc, item) => acc + item.qty * item.price, 0,
-    );
-    setTot(totalPrice);
-  }, [cartItems, flag]);
+  const tot = useMemo(
+    () => cartItems.reduce((acc, item) => acc + item.qty * item.price, 0),
+    [cartItems],
+  );
 
   const clearCart = () => {
     dispatch({ type: actionType.SET_CARTITEMS, cartItems: [] });
@@ -71,7 +67,7 @@ const CartContainer = () => {
           {/* Items list */}
           <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-2 scrollbar-none">
             {cartItems.map((item) => (
-              <CartItem key={item.id} item={item} setFlag={setFlag} flag={flag} />
+              <CartItem key={item.id} item={item} />
             ))}
           </div>
 

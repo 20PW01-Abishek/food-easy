@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MdAccessTime, MdLocationOn, MdPhone, MdShoppingBag } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-import { useStateValue } from "../../context/StateProvider";
+import { useStateValue } from "../../context/StateContext";
 import { getUserOrders } from "../../utils/firebaseFunctions";
 
 const StatusBadge = () => (

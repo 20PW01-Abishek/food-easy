@@ -102,6 +102,7 @@ const CreateItem = () => {
         }, 4000);
       } else {
         const data = {
+          // eslint-disable-next-line react-hooks/purity -- safe: called from event handler
           id: `${Date.now()}`,
           title: title,
           imageURL: imageAsset,
