@@ -66,6 +66,8 @@ Open [http://localhost:3000](http://localhost:3000).
 npm run dev       # start dev server
 npm run build     # production build → dist/
 npm run preview   # preview the production build locally
+npm run lint      # check code quality
+npm run lint:fix  # auto-fix lint issues
 ```
 
 ---
