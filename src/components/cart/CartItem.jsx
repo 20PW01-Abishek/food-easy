@@ -4,6 +4,7 @@ import { BiMinus, BiPlus } from "react-icons/bi";
 
 import { actionType } from "../../context/reducer";
 import { useStateValue } from "../../context/StateContext";
+import { cldUrl } from "../../utils/cloudinary";
 
 const CartItem = ({ item }) => {
   const [{ cartItems }, dispatch] = useStateValue();
@@ -33,7 +34,7 @@ const CartItem = ({ item }) => {
   return (
     <div className="w-full px-3 py-2.5 rounded-xl bg-cartItem flex items-center gap-3">
       <img
-        src={item?.imageURL}
+        src={cldUrl(item?.imageURL, { width: 150 })}
         className="w-12 h-12 rounded-xl object-cover flex-shrink-0"
         alt=""
       />

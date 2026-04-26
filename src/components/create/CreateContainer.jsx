@@ -1,9 +1,3 @@
-import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import {
@@ -14,10 +8,13 @@ import {
   MdFoodBank,
 } from "react-icons/md";
 
-import { storage } from "../../firebase.config";
 import { categories } from "../../utils/data";
 import { saveItem } from "../../utils/firebaseFunctions";
 import Loader from "../layout/Loader";
+
+const CLOUDINARY_CLOUD_NAME = import.meta.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
+const CLOUDINARY_UPLOAD_PRESET = import.meta.env
+  .REACT_APP_CLOUDINARY_UPLOAD_PRESET;
 
 const CreateItem = () => {
   const [title, setTitle] = useState("");
@@ -30,63 +27,44 @@ const CreateItem = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [imageAsset, setImageAsset] = useState(null);
 
-  const uploadImage = (e) => {
+  const uploadImage = async (e) => {
     setIsLoading(true);
     const imageFile = e.target.files[0];
-    const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, imageFile);
+    const formData = new FormData();
+    formData.append("file", imageFile);
+    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
 
-    uploadTask.on(
-      "state_changed",
-      () => {},
-      (error) => {
-        console.error(error);
-        setFields(true);
-        setMsg("Error occurred while uploading, please try again");
-        setAlertStatus("danger");
-        setTimeout(() => {
-          setFields(false);
-          setIsLoading(false);
-        }, 4000);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setImageAsset(downloadURL);
-          setIsLoading(false);
-          setFields(true);
-          setMsg("Image uploaded to database successfully.");
-          setAlertStatus("success");
-          setTimeout(() => {
-            setFields(false);
-          }, 4000);
-        });
-      },
-    );
-  };
-  const deleteImage = () => {
-    setIsLoading(true);
-    const deleteRef = ref(storage, imageAsset);
-    deleteObject(deleteRef)
-      .then(() => {
-        setImageAsset(null);
+    try {
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+        { method: "POST", body: formData },
+      );
+      if (!res.ok) throw new Error(`Upload failed: ${res.status}`);
+      const data = await res.json();
+      setImageAsset(data.secure_url);
+      setIsLoading(false);
+      setFields(true);
+      setMsg("Image uploaded successfully.");
+      setAlertStatus("success");
+      setTimeout(() => setFields(false), 4000);
+    } catch (error) {
+      console.error(error);
+      setFields(true);
+      setMsg("Error occurred while uploading, please try again");
+      setAlertStatus("danger");
+      setTimeout(() => {
+        setFields(false);
         setIsLoading(false);
-        setFields(true);
-        setMsg("Image deletion successful");
-        setAlertStatus("success");
-        setTimeout(() => {
-          setFields(false);
-        }, 4000);
-      })
-      .catch((error) => {
-        console.error(error);
-        setFields(true);
-        setMsg("Error occurred while deleting file. Please try again");
-        setAlertStatus("danger");
-        setTimeout(() => {
-          setFields(false);
-          setIsLoading(false);
-        }, 4000);
-      });
+      }, 4000);
+    }
+  };
+
+  const deleteImage = () => {
+    setImageAsset(null);
+    setFields(true);
+    setMsg("Image cleared. Upload a new one.");
+    setAlertStatus("success");
+    setTimeout(() => setFields(false), 4000);
   };
 
   const saveDetails = () => {

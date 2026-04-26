@@ -5,6 +5,7 @@ import { MdShoppingBasket } from "react-icons/md";
 import { actionType } from "../../context/reducer";
 import { useStateValue } from "../../context/StateContext";
 import NotFound from "../../img/NotFound.svg";
+import { cldUrl } from "../../utils/cloudinary";
 
 const RowContainer = ({ flag, data, scrollValue }) => {
   const rowContainer = useRef();
@@ -48,7 +49,7 @@ const RowContainer = ({ flag, data, scrollValue }) => {
                 whileHover={{ scale: 1.3 }}
               >
                 <img
-                  src={item?.imageURL}
+                  src={cldUrl(item?.imageURL, { width: 400 })}
                   alt=""
                   className="w-full h-full object-contain"
                 />

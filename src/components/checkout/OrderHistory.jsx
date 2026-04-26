@@ -8,6 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 import { useStateValue } from "../../context/StateContext";
+import { cldUrl } from "../../utils/cloudinary";
 import { getUserOrders } from "../../utils/firebaseFunctions";
 
 const StatusBadge = () => (
@@ -99,7 +100,7 @@ const OrderHistory = () => {
                   {order.items.map((item) => (
                     <div key={item.id} className="flex items-center gap-3">
                       <img
-                        src={item.imageURL}
+                        src={cldUrl(item.imageURL, { width: 150 })}
                         alt={item.title}
                         className="w-10 h-10 rounded-lg object-cover flex-shrink-0"
                       />

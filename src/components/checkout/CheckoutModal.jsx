@@ -8,6 +8,7 @@ import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 
 import { actionType } from "../../context/reducer";
 import { useStateValue } from "../../context/StateContext";
+import { cldUrl } from "../../utils/cloudinary";
 import { saveOrder } from "../../utils/firebaseFunctions";
 
 // Fix default leaflet marker icons broken by webpack
@@ -135,7 +136,7 @@ const CheckoutModal = ({ tot, onClose }) => {
                   <div key={item.id} className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <img
-                        src={item.imageURL}
+                        src={cldUrl(item.imageURL, { width: 150 })}
                         alt={item.title}
                         className="w-10 h-10 rounded-lg object-cover"
                       />
