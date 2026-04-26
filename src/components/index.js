@@ -10,3 +10,4 @@ export {
 export { CartContainer, CartItem } from "./cart";
 export { CreateContainer } from "./create";
 export { Services, Aboutus, ProfileCard } from "./pages";
+export { CheckoutModal, OrderHistory } from "./checkout";

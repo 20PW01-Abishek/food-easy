@@ -8,17 +8,29 @@
 # testing
 /coverage
 
-# production
+# build output
 /build
+/dist
+.vite/
 
 # misc
 .DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env files
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# IDE / editor
+.idea/
+*.swp
+*.swo
+
+# claude code
+.claude/

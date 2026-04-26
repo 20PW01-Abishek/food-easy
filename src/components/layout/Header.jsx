@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { MdShoppingBasket, MdAdd, MdLogout } from "react-icons/md";
 import { motion } from "framer-motion";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  signOut,
+  GoogleAuthProvider,
+} from "firebase/auth";
 import { app } from "../../firebase.config";
 import Logo from "../../img/logo.png";
 import Avatar from "../../img/avatar.png";
@@ -24,24 +29,28 @@ const Header = () => {
           firebaseAuth,
           provider,
         );
-        dispatch({
-          type: actionType.SET_USER,
-          user: firebaseUser.providerData[0],
-        });
-        localStorage.setItem(
-          "user",
-          JSON.stringify(firebaseUser.providerData[0]),
-        );
+        const userData = {
+          uid: firebaseUser.uid,
+          email: firebaseUser.email,
+          displayName: firebaseUser.displayName,
+          photoURL: firebaseUser.photoURL,
+          phoneNumber: firebaseUser.phoneNumber,
+        };
+        dispatch({ type: actionType.SET_USER, user: userData });
+        localStorage.setItem("user", JSON.stringify(userData));
       } catch (error) {
         console.error("Error logging in:", error);
       }
-    } else {
-      setIsMenu(!isMenu);
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
     setIsMenu(false);
+    try {
+      await signOut(firebaseAuth);
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
     localStorage.clear();
     dispatch({ type: actionType.SET_USER, user: null });
   };
@@ -81,7 +90,7 @@ const Header = () => {
       exit={{ opacity: 0, scale: 0.6 }}
       className="w-40 bg-surface shadow-xl rounded-lg flex flex-col absolute top-12 right-0"
     >
-      {user && user.email === process.env.REACT_APP_ADMIN_EMAIL && (
+      {user && user.email === import.meta.env.REACT_APP_ADMIN_EMAIL && (
         <Link to="/create">
           <p
             className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-surfaceHover transition-all duration-100 ease-in-out text-textColor text-base"
@@ -129,6 +138,12 @@ const Header = () => {
           onClick={() => setIsMenu(false)}
         >
           <Link to="/aboutus">About Us</Link>
+        </li>
+        <li
+          className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-surfaceHover px-4 py-2"
+          onClick={() => setIsMenu(false)}
+        >
+          <Link to="/orders">My Orders</Link>
         </li>
       </ul>
       <p
@@ -199,13 +214,21 @@ const Header = () => {
               </div>
             )}
           </div>
-          <div className="relative">
+          <div
+            className="relative p-1 cursor-pointer"
+            onMouseEnter={() => user && setIsMenu(true)}
+            onMouseLeave={() => setIsMenu(false)}
+            onClick={login}
+          >
             <motion.img
-              whileTap={{ scale: 0.6 }}
-              src={user ? user.photoURL : Avatar}
-              className="w-9 h-9 sm:w-10 sm:h-10 min-w-[36px] min-h-[36px] drop-shadow-xl cursor-pointer rounded-full object-cover"
+              whileTap={{ scale: 0.85 }}
+              src={user?.photoURL || Avatar}
+              referrerPolicy="no-referrer"
+              className="w-9 h-9 sm:w-10 sm:h-10 min-w-[36px] min-h-[36px] drop-shadow-xl rounded-full object-cover"
               alt="User Profile"
-              onClick={login}
+              onError={(e) => {
+                e.currentTarget.src = Avatar;
+              }}
             />
             {isMenu && menuItems}
           </div>

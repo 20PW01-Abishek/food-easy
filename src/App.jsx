@@ -5,6 +5,7 @@ import {
   CreateContainer,
   Header,
   MainContainer,
+  OrderHistory,
   Services,
   Aboutus,
 } from "./components";
@@ -32,7 +33,7 @@ const App = () => {
   }, [fetchData]);
 
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence mode="wait">
       <div className="w-screen min-h-0 flex flex-col bg-foodEasyLite">
         <Header />
         <main className="mt-14 md:mt-20 px-4 md:px-16 py-4 w-full flex-none min-h-0">
@@ -40,6 +41,7 @@ const App = () => {
             <Route path="/create" element={<CreateContainer />} />
             <Route path="/services" element={<Services />} />
             <Route path="/aboutus" element={<Aboutus />} />
+            <Route path="/orders" element={<OrderHistory />} />
             <Route path="/*" element={<MainContainer />} />
           </Routes>
         </main>

@@ -12,20 +12,14 @@ const CartItem = ({ item, setFlag, flag }) => {
 
   const cartDispatch = () => {
     localStorage.setItem("cartItems", JSON.stringify(items));
-    dispatch({
-      type: actionType.SET_CARTITEMS,
-      cartItems: items,
-    });
+    dispatch({ type: actionType.SET_CARTITEMS, cartItems: items });
   };
 
   const updateQty = (action, id) => {
     if (action === "add") {
       setQty(qty + 1);
       cartItems.forEach((cartItem) => {
-        if (cartItem.id === id) {
-          cartItem.qty += 1;
-          setFlag(flag + 1);
-        }
+        if (cartItem.id === id) { cartItem.qty += 1; setFlag(flag + 1); }
       });
       cartDispatch();
     } else {
@@ -36,52 +30,47 @@ const CartItem = ({ item, setFlag, flag }) => {
       } else {
         setQty(qty - 1);
         cartItems.forEach((cartItem) => {
-          if (cartItem.id === id) {
-            cartItem.qty -= 1;
-            setFlag(flag + 1);
-          }
+          if (cartItem.id === id) { cartItem.qty -= 1; setFlag(flag + 1); }
         });
         cartDispatch();
       }
     }
   };
 
-  useEffect(() => {
-    items = cartItems;
-  }, [cartItems]);
+  useEffect(() => { items = cartItems; }, [cartItems]);
 
   return (
-    <div className="w-full p-1 px-2 rounded-lg bg-cartItem flex items-center gap-2">
+    <div className="w-full px-3 py-2.5 rounded-xl bg-cartItem flex items-center gap-3">
       <img
         src={item?.imageURL}
-        className="w-20 h-20 max-w-[60px] rounded-full object-contain"
+        className="w-12 h-12 rounded-xl object-cover flex-shrink-0"
         alt=""
       />
 
-      <div className="flex flex-col gap-2">
-        <p className="text-base text-white">{item?.title}</p>
-        <p className="text-sm block text-mutedLight font-semibold">
-          $ {parseFloat(item?.price) * qty}
+      <div className="flex flex-col flex-1 min-w-0">
+        <p className="text-sm font-semibold text-white truncate">{item?.title}</p>
+        <p className="text-xs text-mutedLight mt-0.5">
+          $ {(parseFloat(item?.price) * qty).toFixed(2)}
         </p>
       </div>
 
-      <div className="group flex items-center gap-2 ml-auto cursor-pointer">
+      <div className="flex items-center gap-2 bg-cartBg rounded-full px-2 py-1 flex-shrink-0">
         <motion.div
           whileTap={{ scale: 0.75 }}
+          className="cursor-pointer text-mutedLight hover:text-white transition-colors"
           onClick={() => updateQty("remove", item?.id)}
         >
-          <BiMinus className="text-white " />
+          <BiMinus size={14} />
         </motion.div>
 
-        <p className="w-5 h-5 rounded-sm bg-cartBg text-white flex items-center justify-center">
-          {qty}
-        </p>
+        <p className="text-white text-xs font-semibold w-4 text-center">{qty}</p>
 
         <motion.div
           whileTap={{ scale: 0.75 }}
+          className="cursor-pointer text-mutedLight hover:text-white transition-colors"
           onClick={() => updateQty("add", item?.id)}
         >
-          <BiPlus className="text-white " />
+          <BiPlus size={14} />
         </motion.div>
       </div>
     </div>
