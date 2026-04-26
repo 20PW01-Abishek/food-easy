@@ -1,4 +1,5 @@
 import React from "react";
+
 import Delivery from "../../img/delivery.png";
 import { heroData } from "../../utils/data";
 

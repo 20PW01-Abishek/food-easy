@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MdAccessTime, MdLocationOn, MdPhone, MdShoppingBag } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+
 import { useStateValue } from "../../context/StateProvider";
 import { getUserOrders } from "../../utils/firebaseFunctions";
 
@@ -61,7 +62,14 @@ const OrderHistory = () => {
           </div>
         )}
 
-        {!loading && orders.length === 0 && (
+        {!loading && error && (
+          <div className="flex flex-col items-center gap-2 py-16 text-error">
+            <p className="text-base font-medium">Couldn't load your orders</p>
+            <p className="text-xs text-muted">{error}</p>
+          </div>
+        )}
+
+        {!loading && !error && orders.length === 0 && (
           <div className="flex flex-col items-center gap-3 py-16 text-muted">
             <MdShoppingBag size={48} className="text-border" />
             <p className="text-lg font-medium">No orders yet</p>

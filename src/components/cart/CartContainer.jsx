@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { MdDeleteForever } from "react-icons/md";
-import { FiMinimize2 } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { useStateValue } from "../../context/StateProvider";
+import React, { useEffect, useState } from "react";
+import { FiMinimize2 } from "react-icons/fi";
+import { MdDeleteForever } from "react-icons/md";
+
 import { actionType } from "../../context/reducer";
+import { useStateValue } from "../../context/StateProvider";
 import EmptyCart from "../../img/emptyCart.svg";
-import CartItem from "./CartItem";
 import { CheckoutModal } from "../checkout";
+import CartItem from "./CartItem";
 
 const CartContainer = () => {
   const [{ cartShow, cartItems, user }, dispatch] = useStateValue();

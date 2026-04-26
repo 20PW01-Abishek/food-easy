@@ -1,18 +1,19 @@
-import React, { useState } from "react";
-import { MdShoppingBasket, MdAdd, MdLogout } from "react-icons/md";
-import { motion } from "framer-motion";
 import {
   getAuth,
+  GoogleAuthProvider,
   signInWithPopup,
   signOut,
-  GoogleAuthProvider,
 } from "firebase/auth";
-import { app } from "../../firebase.config";
-import Logo from "../../img/logo.png";
-import Avatar from "../../img/avatar.png";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useStateValue } from "../../context/StateProvider";
+import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { MdAdd, MdLogout,MdShoppingBasket } from "react-icons/md";
+import { Link, useLocation,useNavigate } from "react-router-dom";
+
 import { actionType } from "../../context/reducer";
+import { useStateValue } from "../../context/StateProvider";
+import { app } from "../../firebase.config";
+import Avatar from "../../img/avatar.png";
+import Logo from "../../img/logo.png";
 
 const Header = () => {
   const navigate = useNavigate();

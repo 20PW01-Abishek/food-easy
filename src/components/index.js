@@ -1,13 +1,13 @@
 import React from "react";
 
+export { CartContainer, CartItem } from "./cart";
+export { CheckoutModal, OrderHistory } from "./checkout";
+export { CreateContainer } from "./create";
 export { Header, Loader } from "./layout";
 export {
-  MainContainer,
   HomeContainer,
-  RowContainer,
+  MainContainer,
   MenuContainer,
+  RowContainer,
 } from "./menu";
-export { CartContainer, CartItem } from "./cart";
-export { CreateContainer } from "./create";
-export { Services, Aboutus, ProfileCard } from "./pages";
-export { CheckoutModal, OrderHistory } from "./checkout";
+export { Aboutus, ProfileCard,Services } from "./pages";

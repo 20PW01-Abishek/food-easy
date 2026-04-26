@@ -1,17 +1,18 @@
+import { AnimatePresence } from "framer-motion";
 import React, { useCallback, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+
 import {
+  Aboutus,
   CreateContainer,
   Header,
   MainContainer,
   OrderHistory,
   Services,
-  Aboutus,
 } from "./components";
+import { actionType } from "./context/reducer";
 import { useStateValue } from "./context/StateProvider";
 import { getAllFoodItems } from "./utils/firebaseFunctions";
-import { actionType } from "./context/reducer";
 
 const App = () => {
   const [, dispatch] = useStateValue();

@@ -1,4 +1,3 @@
-import React from "react";
 import {
   addDoc,
   collection,
@@ -10,6 +9,8 @@ import {
   setDoc,
   where,
 } from "firebase/firestore";
+import React from "react";
+
 import { firestore } from "../firebase.config";
 
 // Saving new Item

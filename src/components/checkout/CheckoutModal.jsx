@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { MdClose, MdLocationOn, MdPhone, MdMyLocation } from "react-icons/md";
-import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
-import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { useStateValue } from "../../context/StateProvider";
+
+import { motion } from "framer-motion";
+import L from "leaflet";
+import React, { useEffect, useState } from "react";
+import { MdClose, MdLocationOn, MdMyLocation,MdPhone } from "react-icons/md";
+import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
+
 import { actionType } from "../../context/reducer";
+import { useStateValue } from "../../context/StateProvider";
 import { saveOrder } from "../../utils/firebaseFunctions";
 
 // Fix default leaflet marker icons broken by webpack

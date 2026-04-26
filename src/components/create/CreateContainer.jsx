@@ -4,19 +4,20 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
+import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import {
-  MdFastfood,
+  MdAttachMoney,
   MdCloudUpload,
   MdDelete,
+  MdFastfood,
   MdFoodBank,
-  MdAttachMoney,
 } from "react-icons/md";
+
 import { storage } from "../../firebase.config";
 import { categories } from "../../utils/data";
 import { saveItem } from "../../utils/firebaseFunctions";
 import Loader from "../layout/Loader";
-import { AnimatePresence, motion } from "framer-motion";
 
 const CreateItem = () => {
   const [title, setTitle] = useState("");

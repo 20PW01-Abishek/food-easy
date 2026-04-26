@@ -1,7 +1,7 @@
-import React from "react";
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import React from "react";
 
 const firebaseConfig = {
   apiKey: import.meta.env.REACT_APP_APIKEY,
